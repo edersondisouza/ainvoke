@@ -24,6 +24,8 @@ RUN echo "Defaults env_keep += \"http_proxy https_proxy HTTP_PROXY HTTPS_PROXY\"
 
 USER ${USER}
 
+RUN sudo chown -R ${USER}:${GROUP} /venv
+
 RUN mkdir ~/yay && \
     pushd ~/yay && \
     wget -O PKGBUILD https://aur.archlinux.org/cgit/aur.git/plain/PKGBUILD?h=yay && \
