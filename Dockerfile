@@ -20,6 +20,7 @@ RUN groupadd -g ${GROUP_ID} ${GROUP} && \
     useradd -rm -d /home/${USER} -s /bin/bash -g ${GROUP} -G wheel -u ${USER_ID} ${USER}
 
 RUN echo "${USER} ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
+RUN echo "Defaults env_keep += \"http_proxy https_proxy HTTP_PROXY HTTPS_PROXY\"" >> /etc/sudoers
 
 USER ${USER}
 
