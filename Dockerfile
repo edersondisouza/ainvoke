@@ -14,7 +14,8 @@ RUN pacman -Syu --noconfirm && \
 RUN python -m venv /venv && \
     source /venv/bin/activate && \
     pip install --upgrade pip && \
-    pip install west
+    pip install west && \
+    pip install -r https://raw.githubusercontent.com/zephyrproject-rtos/zephyr/refs/heads/main/scripts/requirements.txt
 
 RUN groupadd -g ${GROUP_ID} ${GROUP} && \
     useradd -rm -d /home/${USER} -s /bin/bash -g ${GROUP} -G wheel -u ${USER_ID} ${USER}
@@ -23,6 +24,13 @@ RUN echo "${USER} ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
 RUN echo "Defaults env_keep += \"http_proxy https_proxy HTTP_PROXY HTTPS_PROXY\"" >> /etc/sudoers
 
 USER ${USER}
+
+RUN pushd ~ && \
+wget https://github.com/zephyrproject-rtos/sdk-ng/releases/download/v1.0.1/zephyr-sdk-1.0.1_linux-x86_64_gnu.tar.xz && \
+    tar -xf zephyr-sdk-1.0.1_linux-x86_64_gnu.tar.xz && \
+    ./zephyr-sdk-1.0.1/setup.sh -t all -c && \
+    rm zephyr-sdk-1.0.1_linux-x86_64_gnu.tar.xz && \
+    popd
 
 RUN sudo chown -R ${USER}:${GROUP} /venv
 
