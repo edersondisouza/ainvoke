@@ -21,7 +21,7 @@ fi
 
 source $SOURCE_ENV
 
-docker build --build-arg USER=$USER --build-arg USER_ID=$USER_ID \
+docker build --network=host --build-arg USER=$USER --build-arg USER_ID=$USER_ID \
    --build-arg GROUP=$GROUP --build-arg GROUP_ID=$GROUP_ID \
    --build-arg CLAUDE_CODE_OAUTH_TOKEN=$CLAUDE_CODE_OAUTH_TOKEN \
    --build-arg COPILOT_GITHUB_TOKEN=$COPILOT_GITHUB_TOKEN \
