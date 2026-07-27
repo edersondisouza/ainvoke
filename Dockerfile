@@ -28,7 +28,7 @@ USER ${USER}
 RUN pushd ~ && \
 wget https://github.com/zephyrproject-rtos/sdk-ng/releases/download/v1.0.1/zephyr-sdk-1.0.1_linux-x86_64_gnu.tar.xz && \
     tar -xf zephyr-sdk-1.0.1_linux-x86_64_gnu.tar.xz && \
-    ./zephyr-sdk-1.0.1/setup.sh -t all -c && \
+    ./zephyr-sdk-1.0.1/setup.sh -t all -h -c && \
     rm zephyr-sdk-1.0.1_linux-x86_64_gnu.tar.xz && \
     popd
 
