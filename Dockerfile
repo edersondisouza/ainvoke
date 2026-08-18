@@ -8,7 +8,7 @@ ARG CLAUDE_CODE_OAUTH_TOKEN
 ARG COPILOT_GITHUB_TOKEN
 
 RUN pacman -Syu --noconfirm && \
-    pacman -S --noconfirm git vim screen python-pip cmake wget ninja \
+    pacman -S --noconfirm git vim screen python-pip cmake wget ninja gperf \
     dtc tig less bash-completion
 
 RUN python -m venv /venv && \
