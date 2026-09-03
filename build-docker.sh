@@ -25,4 +25,6 @@ docker build --network=host --build-arg USER=$USER --build-arg USER_ID=$USER_ID 
    --build-arg GROUP=$GROUP --build-arg GROUP_ID=$GROUP_ID \
    --build-arg CLAUDE_CODE_OAUTH_TOKEN=$CLAUDE_CODE_OAUTH_TOKEN \
    --build-arg COPILOT_GITHUB_TOKEN=$COPILOT_GITHUB_TOKEN \
+   --build-arg GIT_EMAIL=$GIT_EMAIL \
+   --build-arg GIT_NAME="$GIT_NAME" \
    -t ainvoke --target ainvoke .

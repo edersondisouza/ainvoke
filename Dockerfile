@@ -6,6 +6,8 @@ ARG GROUP
 ARG GROUP_ID
 ARG CLAUDE_CODE_OAUTH_TOKEN
 ARG COPILOT_GITHUB_TOKEN
+ARG GIT_NAME
+ARG GIT_EMAIL
 
 RUN pacman -Syu --noconfirm && \
     pacman -S --noconfirm git vim screen python-pip cmake wget ninja gperf \
@@ -44,6 +46,9 @@ RUN yay --noconfirm -S zig0.15-bin
 
 RUN curl -fsSL https://claude.ai/install.sh | bash
 RUN curl -fsSL https://gh.io/copilot-install | bash
+
+RUN git config --global user.name "${GIT_NAME}" && \
+    git config --global user.email "${GIT_EMAIL}"
 
 # Work around a Claude Code bug where CLAUDE_CODE_OAUTH_TOKEN is ignored
 # unless onboarding is marked complete in ~/.claude.json.
