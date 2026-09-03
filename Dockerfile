@@ -57,3 +57,4 @@ RUN python -c "import json, os; p = os.path.expanduser('~/.claude.json'); d = js
 ENV PATH=${PATH}:/home/${USER}/.local/bin
 ENV CLAUDE_CODE_OAUTH_TOKEN=${CLAUDE_CODE_OAUTH_TOKEN}
 ENV COPILOT_GITHUB_TOKEN=${COPILOT_GITHUB_TOKEN}
+ENV EDITOR=/usr/bin/vim
