@@ -21,8 +21,13 @@ echo "Play dir (so taht you don't touch lower dir) lives at '$PLAY_MERGED_DIR'"
 sudo mount -t overlay overlay -o lowerdir="$DIR",upperdir="$UPPER_DIR",workdir="$WORK_DIR" "$MERGED_DIR"
 sudo mount -t overlay overlay -o lowerdir="$DIR",upperdir="$PLAY_UPPER_DIR",workdir="$PLAY_WORK_DIR" "$PLAY_MERGED_DIR"
 
-docker run --rm -it --mount type=bind,src="$MERGED_DIR",dst="$MERGED_DIR" \
-    ainvoke:latest bash -c "cd $MERGED_DIR && copilot update ; claude update ; bash"
+CONTAINER=$(docker run -dt --mount type=bind,src="$MERGED_DIR",dst="$MERGED_DIR" ainvoke:latest)
+
+docker exec -it ${CONTAINER} \
+    bash -c "cd $MERGED_DIR && copilot update ; claude update ; bash"
+
+docker kill ${CONTAINER} &> /dev/null
+docker rm ${CONTAINER} &> /dev/null
 
 echo "Last call to check relevant files at '$MERGED_DIR'"
 echo "Press enter to unmount"
